@@ -140,7 +140,7 @@ source venv/bin/activate
 uvicorn app:app --host 0.0.0.0 --port 8000 --reload
 ```
 
-The API will be available at: `http://localhost:8000`
+The API will be available at: `https://interview-bot-bdco.onrender.com`
 
 ### 3. Frontend Setup
 
@@ -170,11 +170,11 @@ cd frontend && npm install && npm run dev
 
 ### Health Check
 ```bash
-curl http://localhost:8000/health
+curl https://interview-bot-bdco.onrender.com/health
 ```
 
 ### API Documentation
-Visit: `http://localhost:8000/docs`
+Visit: `https://interview-bot-bdco.onrender.com/docs`
 
 ## 📚 API Endpoints
 
@@ -241,15 +241,15 @@ db.sessions.countDocuments()
 ### Test API Endpoints
 ```bash
 # Test health check
-curl http://localhost:8000/health
+curl https://interview-bot-bdco.onrender.com/health
 
 # Test session creation
-curl -X POST http://localhost:8000/api/sessions/init \
+curl -X POST https://interview-bot-bdco.onrender.com/api/sessions/init \
   -H "Content-Type: application/json" \
   -d '{"role_id": "meta-ads-expert"}'
 
 # Test chat message
-curl -X POST http://localhost:8000/api/chat/send \
+curl -X POST https://interview-bot-bdco.onrender.com/api/chat/send \
   -H "Content-Type: application/json" \
   -d '{"session_id": "your_session_id", "message": "Hello!"}'
 ```

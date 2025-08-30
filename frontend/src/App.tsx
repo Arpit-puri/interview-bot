@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Chat from "./components/Chat";
 import RoleSelection from "./components/RoleSelection";
-
 function App() {
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [selectedRole, setSelectedRole] = useState<string | null>(null);
@@ -10,7 +9,7 @@ function App() {
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [interviewEnded, setInterviewEnded] = useState(false);
   const [finalInterviewTime, setFinalInterviewTime] = useState<number | null>(null);
-
+  const uri = 'https://interview-bot-bdco.onrender.com'
   useEffect(() => {
     document.body.style.background = "linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)";
     document.body.style.minHeight = "100vh";
@@ -35,7 +34,7 @@ function App() {
     setSelectedRoleTitle(roleTitle);
 
     try {
-      const response = await fetch("http://localhost:8000/api/sessions/init", {
+      const response = await fetch(`${uri}/api/sessions/init`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ role_id: roleId })

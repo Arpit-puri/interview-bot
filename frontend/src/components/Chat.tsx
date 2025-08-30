@@ -34,7 +34,8 @@ export default function Chat({ sessionId, roleTitle, onTimerUpdate, onInterviewE
   // Fetch session status
   const fetchSessionStatus = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/api/sessions/${sessionId}/status`);
+      let uri = 'https://interview-bot-bdco.onrender.com'
+      const response = await fetch(`${uri}/api/sessions/${sessionId}/status`);
       const status = await response.json();
       setSessionStatus(status);
       
@@ -48,7 +49,7 @@ export default function Chat({ sessionId, roleTitle, onTimerUpdate, onInterviewE
   };
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/sessions/${sessionId}/history`)
+    fetch(`https://interview-bot-bdco.onrender.com/api/sessions/${sessionId}/history`)
       .then((res) => res.json())
       .then((data) => {
         setMessages(data);
@@ -83,7 +84,7 @@ export default function Chat({ sessionId, roleTitle, onTimerUpdate, onInterviewE
 
   const endInterview = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/sessions/end", {
+      const response = await fetch("https://interview-bot-bdco.onrender.com/api/sessions/end", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ session_id: sessionId }),
@@ -113,7 +114,7 @@ export default function Chat({ sessionId, roleTitle, onTimerUpdate, onInterviewE
     setInterviewStarted(true);
 
     try {
-      const res = await fetch("http://localhost:8000/api/chat/send", {
+      const res = await fetch("https://interview-bot-bdco.onrender.com/api/chat/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: input, session_id: sessionId }),
@@ -153,7 +154,7 @@ export default function Chat({ sessionId, roleTitle, onTimerUpdate, onInterviewE
     setInterviewStarted(true);
   
     try {
-      const res = await fetch("http://localhost:8000/api/chat/stream", {
+      const res = await fetch("https://interview-bot-bdco.onrender.com/api/chat/stream", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: input, session_id: sessionId }),
@@ -200,7 +201,7 @@ export default function Chat({ sessionId, roleTitle, onTimerUpdate, onInterviewE
     setStartTime(now);
 
     try {
-      const res = await fetch("http://localhost:8000/api/sessions/start", {
+      const res = await fetch("https://interview-bot-bdco.onrender.com/api/sessions/start", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ session_id: sessionId }),
