@@ -15,22 +15,74 @@ An intelligent interview bot powered by AI that conducts realistic job interview
 ## 🏗️ Architecture
 
 ```
-interview-bot/
-├── backend/                 # FastAPI backend
-│   ├── app.py              # Main application entry point
-│   ├── config/             # Configuration management
-│   ├── models/             # Data models & schemas
-│   ├── services/           # Business logic layer
-│   ├── routes/             # API endpoints
-│   ├── data/               # Static content & prompts
-│   └── requirements.txt    # Python dependencies
-└── frontend/               # React frontend
-    ├── src/
-    │   ├── components/     # React components
-    │   └── App.tsx         # Main application
-    └── package.json        # Node.js dependencies
+backend/
+├── app.py                      # 🚀 FastAPI application entry point
+├── config/                     # ⚙️ Configuration management
+│   ├── __init__.py
+│   ├── settings.py             # App settings & environment variables
+│   ├── database.py             # MongoDB connection & configuration
+│   └── constants.py            # Global constants & enums
+├── api/                        # 🌐 API layer (HTTP endpoints)
+│   ├── __init__.py
+│   ├── v1/                     # API versioning
+│   │   ├── __init__.py
+│   │   ├── endpoints/          # Route handlers
+│   │   │   ├── __init__.py
+│   │   │   ├── sessions.py     # Session management endpoints
+│   │   │   ├── chat.py         # Chat interaction endpoints
+│   │   │   └── health.py       # System health endpoints
+│   │   └── dependencies.py     # API dependencies
+├── core/                       # 🎯 Core application logic
+│   ├── __init__.py
+│   ├── services/               # 🔧 Business logic services
+│   │   ├── __init__.py
+│   │   ├── session_service.py  # Session management logic
+│   │   ├── chat_service.py     # Chat processing logic
+│   │   └── ai_service.py       # AI integration (OpenRouter)
+│   └── models/                 # 📊 Data models & schemas
+│       ├── __init__.py
+│       ├── database/           # Database models
+│       │   ├── __init__.py
+│       │   ├── session.py      # Session database model
+│       │   └── base.py         # Base database model
+│       └── schemas/            # Pydantic schemas
+│           ├── __init__.py
+│           ├── session.py      # Session request/response schemas
+│           └── chat.py         # Chat request/response schemas
+├── database/                   # 🗄️ Database layer
+│   ├── __init__.py
+│   ├── mongodb.py              # MongoDB client & operations
+│   └── repositories/           # Data access layer
+│       ├── __init__.py
+│       ├── session_repository.py # Session data operations
+│       └── base_repository.py  # Base repository pattern
+├── utils/                      # ⚡ Utility functions
+│   ├── __init__.py
+│   ├── logging.py              # Logging configuration
+│   └── helpers.py              # Helper functions
+├── data/                       # 📚 Static data & prompts
+│   ├── __init__.py
+│   └── role_prompts.py         # Interview role configurations
+└── requirements.txt            # 📦 Python dependencies
 ```
+🎯 Architecture Principles
+Clean Architecture Layers
+API Layer: HTTP handling, request validation, response formatting
 
+Core Layer: Business logic, domain models, service orchestration
+
+Database Layer: Data access, repository pattern, persistence
+
+Configuration: Environment settings, constants, dependencies
+
+Separation of Concerns
+Routes: Handle HTTP requests/responses only
+
+Services: Contain business logic and orchestration
+
+Repositories: Handle data access operations
+
+Models: Define data structures and validation
 ## 📋 Prerequisites
 
 - **Python 3.8+**
