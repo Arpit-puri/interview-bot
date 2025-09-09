@@ -2,12 +2,23 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from config.database import db
 from routes import session_routes, chat_routes, auth_route
+from contextlib import asynccontextmanager
+
+# Database events handled via lifespan
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    await db.connect_db()
+    try:
+        yield
+    finally:
+        await db.close_db()
 
 # Create FastAPI app
 app = FastAPI(
     title="Interview Bot API",
     description="AI-powered interview bot with MongoDB backend",
-    version="1.0.0"
+    version="1.0.0",
+    lifespan=lifespan
 )
 
 # Add CORS middleware
@@ -19,14 +30,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Database events
-@app.on_event("startup")
-async def startup_db_client():
-    await db.connect_db()
-
-@app.on_event("shutdown")
-async def shutdown_db_client():
-    await db.close_db()
 
 # Include routers
 app.include_router(auth_route.router)
